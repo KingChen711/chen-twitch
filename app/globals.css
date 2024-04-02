@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+:root {
+}
+
+.hidden-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -36,32 +50,32 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 226.7 12.7% 13.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 226.7 12.7% 13.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 226.7 12.7% 13.9%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 226.7 12.7% 17.5%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 226.7 12.7% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 226.7 12.7% 17.5%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 226.7 12.7% 17.5%;
+    --input: 226.7 12.7% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
 }
@@ -78,4 +92,50 @@
 /* hack clerk :)) */
 .cl-internal-b3fm6y {
   @apply hidden;
+}
+
+.dark .cl-internal-mdg29y,
+.dark .cl-internal-18ut2g5,
+.dark .cl-internal-zooryz,
+.dark .cl-internal-17ydaof {
+  @apply bg-[#19191a];
+}
+
+.dark .cl-internal-1vbdq0x,
+.dark .cl-internal-7pl8hj,
+.dark .cl-internal-138ov2f,
+.dark .cl-internal-1xpzc82,
+.dark .cl-internal-mdg29y,
+.dark .cl-internal-17bz5n6,
+.dark .cl-internal-18ut2g5,
+.dark .cl-internal-1s2rqwh,
+.dark .cl-internal-zooryz,
+.dark .cl-internal-13zhnx0 {
+  @apply text-white;
+}
+
+.dark .cl-internal-1hun4op {
+  @apply text-slate-200;
+}
+
+.dark .cl-internal-19nto4s {
+  @apply text-red-500;
+}
+
+.dark .cl-internal-b868gt {
+  @apply bg-white/10;
+}
+
+.dark .cl-internal-oaq42g {
+  @apply stroke-white;
+}
+
+.dark .cl-internal-u0g48b {
+  @apply !stroke-white;
+}
+
+.dark .cl-internal-mdg29y,
+.dark .cl-internal-18ut2g5,
+.dark .cl-internal-1hhd4k {
+  @apply border-white/10 border rounded-md;
 }
