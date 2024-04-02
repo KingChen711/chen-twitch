@@ -11,7 +11,7 @@ const font = Poppins({
 function Logo() {
   return (
     <div className='flex flex-col items-center gap-y-4'>
-      <div className='rounded-full bg-[#323338] p-1 dark:bg-white'>
+      <div className='rounded-full bg-foreground p-1'>
         <Image className='invert dark:invert-0' src='/spooky.svg' alt='twitch' height={80} width={80} />
       </div>
 
