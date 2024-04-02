@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from '@/contexts/theme-provider'
+import { dark } from '@clerk/themes'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +18,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
-      <html lang='en' suppressHydrationWarning>
-        <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark
+      }}
+    >
+      <html lang='en'>
+        <ThemeProvider attribute='class' forcedTheme='dark' storageKey='chen-twitch-theme'>
           <body className={inter.className}>{children}</body>
         </ThemeProvider>
       </html>
