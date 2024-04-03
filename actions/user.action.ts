@@ -1,6 +1,19 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { auth } from '@clerk/nextjs'
+
+export const whoAmI = async () => {
+  const { userId: clerkId } = auth()
+
+  if (!clerkId) {
+    return null
+  }
+
+  return await prisma.user.findUnique({
+    where: { clerkId }
+  })
+}
 
 type CreateUserParams = {
   clerkId: string

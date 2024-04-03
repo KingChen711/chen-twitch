@@ -1,4 +1,6 @@
-import NavBar from './_components/nav-bar'
+import { Suspense } from 'react'
+import NavBar from './_components/navbar'
+import SideBar, { SideBarSkeleton } from './_components/sidebar'
 
 export default function MainLayout({
   children
@@ -8,7 +10,12 @@ export default function MainLayout({
   return (
     <>
       <NavBar />
-      <div className='flex h-full pt-20'>{children}</div>
+      <div className='flex h-dvh pt-20'>
+        <Suspense fallback={<SideBarSkeleton />}>
+          <SideBar />
+        </Suspense>
+        {children}
+      </div>
     </>
   )
 }

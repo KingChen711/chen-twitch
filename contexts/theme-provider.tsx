@@ -12,7 +12,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   }, [])
 
   if (!mounted) {
-    return <React.Fragment {...props}>{children}</React.Fragment>
+    return <React.Fragment>{children}</React.Fragment>
   }
 
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
