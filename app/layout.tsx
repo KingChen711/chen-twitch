@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
-import { ThemeProvider } from '@/contexts/theme-provider'
 import { dark } from '@clerk/themes'
+import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,10 +26,10 @@ export default function RootLayout({
         baseTheme: dark
       }}
     >
-      <html lang='en'>
-        <ThemeProvider attribute='class' forcedTheme='dark' storageKey='chen-twitch-theme'>
-          <body className={inter.className}>{children}</body>
-        </ThemeProvider>
+      <html lang='en' suppressHydrationWarning>
+        <body className={inter.className}>
+          <Providers>{children}</Providers>
+        </body>
       </html>
     </ClerkProvider>
   )

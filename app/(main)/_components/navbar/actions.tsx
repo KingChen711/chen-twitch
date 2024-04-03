@@ -1,3 +1,4 @@
+import ThemeSwitch from '@/components/shared/theme-switch'
 import { Button } from '@/components/ui/button'
 import { SignInButton, SignedIn, SignedOut, UserButton, currentUser } from '@clerk/nextjs'
 import { Clapperboard } from 'lucide-react'
@@ -29,6 +30,8 @@ async function Actions() {
           <UserButton afterSignOutUrl='/' />
         </div>
       </SignedIn>
+
+      <ThemeSwitch />
     </div>
   )
 }
