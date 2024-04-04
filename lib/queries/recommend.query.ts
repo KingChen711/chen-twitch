@@ -1,12 +1,12 @@
-import prisma from '@/lib/prisma'
-import { auth } from '@clerk/nextjs'
 import { Prisma } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
 import { cache } from 'react'
+import { whoAmI } from './user.query'
+import prisma from '../prisma'
 
 // TODO: should be better recommend
 export const getRecommendedUsers = cache(async () => {
-  const { userId: clerkId } = auth()
+  const currentUser = await whoAmI()
 
   const query: Prisma.UserFindManyArgs<DefaultArgs> = {
     orderBy: {
@@ -14,13 +14,28 @@ export const getRecommendedUsers = cache(async () => {
     }
   }
 
-  if (clerkId) {
+  if (currentUser) {
     query.where = {
-      NOT: {
-        clerkId
-      }
+      AND: [
+        // exclude by self
+        {
+          NOT: {
+            id: currentUser.id
+          }
+        },
+        // exclude users who be following by current user
+        {
+          NOT: {
+            followers: {
+              some: {
+                followerId: currentUser.id
+              }
+            }
+          }
+        }
+      ]
     }
   }
 
-  return await prisma.user.findMany(query)
+  return prisma.user.findMany(query)
 })
