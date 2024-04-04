@@ -22,6 +22,7 @@ interface Props extends VariantProps<typeof avatarSizes> {
   imageUrl: string
   isLive?: boolean
   showBadge?: boolean
+  sideBar?: boolean
 }
 
 function UserAvatar({ imageUrl, isLive, username, showBadge, size }: Props) {
@@ -38,7 +39,7 @@ function UserAvatar({ imageUrl, isLive, username, showBadge, size }: Props) {
       </Avatar>
 
       {canShowBadge && (
-        <div className='absolute -bottom-3 left-1/2 -translate-x-1/2'>
+        <div className='absolute -bottom-3 left-1/2 -translate-x-1/2 max-md:hidden'>
           <LiveBadge />
         </div>
       )}

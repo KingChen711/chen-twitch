@@ -14,7 +14,7 @@ function Wrapper({ children }: Props) {
   return (
     <aside
       className={cn(
-        'sticky left-0 flex h-full w-60 flex-col overflow-y-auto border-r bg-muted z-50',
+        'sticky left-0 flex h-full w-60 flex-col overflow-y-auto border-r bg-muted z-50 max-lg:w-[70px]',
         isCollapsed && 'w-[70px]'
       )}
     >

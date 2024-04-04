@@ -23,7 +23,7 @@ function RecommendUsers({ data }: Props) {
   return (
     <div>
       {showLabel && (
-        <div className='mb-4 pl-6'>
+        <div className='mb-4 pl-6 max-lg:hidden'>
           <p className='text-sm text-muted-foreground'>Recommended</p>
         </div>
       )}
@@ -59,10 +59,10 @@ const UserItem = ({ imageUrl, isLive, username }: UserItemProps) => {
       className={cn('w-full h-12', isCollapsed ? 'justify-center' : 'justify-start', isActive && 'bg-background')}
     >
       <Link href={href}>
-        <div className={cn('flex items-center w-full gap-x-4', isCollapsed && 'justify-center')}>
-          <UserAvatar imageUrl={imageUrl} isLive={isLive} username={username} />
-          {!isCollapsed && <p className='truncate'>{username}</p>}
-          {!isCollapsed && isLive && <LiveBadge className='ml-auto' />}
+        <div className={cn('flex items-center w-full gap-x-4 justify-center')}>
+          <UserAvatar imageUrl={imageUrl} isLive={isLive} username={username} sideBar />
+          {!isCollapsed && <p className='truncate max-lg:hidden'>{username}</p>}
+          {!isCollapsed && isLive && <LiveBadge className='ml-auto max-lg:hidden' />}
         </div>
       </Link>
     </Button>

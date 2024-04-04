@@ -19,8 +19,6 @@ async function SideBar() {
 
 export default SideBar
 
-// sticky left-0 flex h-full w-60 flex-col overflow-y-auto border-r bg-muted z-50
-
 export const SideBarSkeleton = () => {
   return (
     <aside className='sticky left-0 z-50 flex h-full w-[70px] flex-col border-r border-card bg-muted lg:w-60'>

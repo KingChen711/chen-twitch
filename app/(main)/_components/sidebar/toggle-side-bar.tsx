@@ -25,7 +25,7 @@ function ToggleSideBar() {
   return (
     <>
       {isCollapsed && (
-        <div className='mb-4 hidden w-full items-center justify-center pt-4 lg:flex'>
+        <div className='mb-4 hidden w-full items-center justify-center pt-4 max-lg:hidden lg:flex'>
           <Hint label={label} side='right' asChild>
             <Button onClick={expand} size='icon' className='hover:bg-card' variant='ghost'>
               <ArrowRightFromLine className='size-4' />
@@ -34,7 +34,7 @@ function ToggleSideBar() {
         </div>
       )}
       {!isCollapsed && (
-        <div className='mb-2 flex w-full items-center p-3 pl-6'>
+        <div className='mb-2 flex w-full items-center p-3 pl-6 max-lg:hidden'>
           <p className='font-semibold text-primary'>For you</p>
 
           <Hint label={label} side='right' asChild>
