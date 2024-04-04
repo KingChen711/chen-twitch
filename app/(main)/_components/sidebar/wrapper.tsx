@@ -1,15 +1,22 @@
 'use client'
 
+import useIsClient from '@/hook/use-is-client'
 import { cn } from '@/lib/utils'
 import { useSideBar } from '@/store/use-side-bar'
 import React from 'react'
+import { SideBarSkeleton } from '.'
 
 type Props = {
   children: React.ReactNode
 }
 
 function Wrapper({ children }: Props) {
+  const isClient = useIsClient()
   const { isCollapsed } = useSideBar()
+
+  if (!isClient) {
+    return <SideBarSkeleton />
+  }
 
   return (
     <aside
