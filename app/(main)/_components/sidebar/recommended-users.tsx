@@ -18,8 +18,6 @@ type Props = {
 function RecommendUsers({ data }: Props) {
   const { isCollapsed } = useSideBar()
 
-  console.log({ isCollapsed })
-
   const showLabel = !isCollapsed && data.length > 0
 
   return (
