@@ -8,14 +8,14 @@ export default function MainLayout({
   children: React.ReactNode
 }>) {
   return (
-    <>
+    <main className='relative'>
       <NavBar />
-      <div className='flex h-dvh pt-20'>
+      <div className='flex'>
         <Suspense fallback={<SideBarSkeleton />}>
           <SideBar />
         </Suspense>
-        {children}
+        <main className='flex-1 pt-20'>{children}</main>
       </div>
-    </>
+    </main>
   )
 }

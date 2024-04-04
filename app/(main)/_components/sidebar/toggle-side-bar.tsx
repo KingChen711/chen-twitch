@@ -1,12 +1,12 @@
 'use client'
 
-import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useMedia } from 'react-use'
 import { useSideBar } from '@/store/use-side-bar'
 
 import Hint from '@/components/shared/hint'
 import { Button } from '@/components/ui/button'
+import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
 
 function ToggleSideBar() {
   const { collapse, expand, isCollapsed } = useSideBar()

@@ -17,7 +17,7 @@ function Logo() {
 
       <div className={cn('flex flex-col items-center', font.className)}>
         <p className='text-xl font-semibold'>
-          Chen<strong className='text-indigo-500'>Twitch</strong>
+          Chen<strong className='text-indigo-600'>Twitch</strong>
         </p>
         <p className='text-sm text-muted-foreground'>Let&apos;s play</p>
       </div>

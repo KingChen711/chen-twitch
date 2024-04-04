@@ -1,15 +1,17 @@
 'use client'
 
+import React from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useSideBar } from '@/store/use-side-bar'
+
+import { cn } from '@/lib/utils'
+import { User } from '@prisma/client'
+
 import LiveBadge from '@/components/shared/live-badge'
 import UserAvatar from '@/components/shared/user-avatar'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { cn } from '@/lib/utils'
-import { useSideBar } from '@/store/use-side-bar'
-import { User } from '@prisma/client'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React from 'react'
 
 type Props = {
   data: User[]

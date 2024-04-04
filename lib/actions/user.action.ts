@@ -1,36 +1,13 @@
 'use server'
 
 import prisma from '@/lib/prisma'
-import { auth } from '@clerk/nextjs'
 
-export const whoAmI = async () => {
-  const { userId: clerkId } = auth()
-
-  if (!clerkId) {
-    return null
-  }
-
-  return await prisma.user.findUnique({
-    where: { clerkId }
-  })
-}
-
-type CreateUserParams = {
-  clerkId: string
-  username: string
-  imageUrl: string
-}
+import { CreateUserParams, DeleteUserParams, UpdateUserParams } from '../param'
 
 export const createUser = async (params: CreateUserParams) => {
   return await prisma.user.create({
     data: params
   })
-}
-
-type UpdateUserParams = {
-  username: string
-  imageUrl?: string
-  bio?: string
 }
 
 export const updateUser = async (params: UpdateUserParams) => {
@@ -42,10 +19,6 @@ export const updateUser = async (params: UpdateUserParams) => {
     },
     data: params
   })
-}
-
-type DeleteUserParams = {
-  clerkId: string
 }
 
 export const deleteUser = async (params: DeleteUserParams) => {
