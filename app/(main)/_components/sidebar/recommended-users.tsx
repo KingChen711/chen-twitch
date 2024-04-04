@@ -82,10 +82,16 @@ export const UserItemSkeleton = () => {
 
 export const RecommendUsersSkeleton = () => {
   return (
-    <ul className='px-2'>
-      <UserItemSkeleton />
-      <UserItemSkeleton />
-      <UserItemSkeleton />
-    </ul>
+    <div>
+      <div className='mb-4 pl-6 max-md:hidden'>
+        <p className='text-sm text-muted-foreground'>Recommended</p>
+      </div>
+
+      <ul className='px-2'>
+        <UserItemSkeleton />
+        <UserItemSkeleton />
+        <UserItemSkeleton />
+      </ul>
+    </div>
   )
 }

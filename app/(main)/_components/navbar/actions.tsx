@@ -1,6 +1,6 @@
-import ThemeSwitch from '@/components/shared/theme-switch'
 import { Button } from '@/components/ui/button'
-import { SignInButton, SignedIn, SignedOut, UserButton, currentUser } from '@clerk/nextjs'
+import { Skeleton } from '@/components/ui/skeleton'
+import { ClerkLoaded, ClerkLoading, SignInButton, SignedIn, SignedOut, UserButton, currentUser } from '@clerk/nextjs'
 import { Clapperboard } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -27,11 +27,18 @@ async function Actions() {
             </Link>
           </Button>
 
-          <UserButton afterSignOutUrl='/' />
+          {/* wrap this part to not flick UI when avatar loaded */}
+          <div className='flex size-9 items-center justify-center'>
+            <ClerkLoading>
+              <Skeleton className='size-8 rounded-full' />
+            </ClerkLoading>
+
+            <ClerkLoaded>
+              <UserButton afterSignOutUrl='/' />
+            </ClerkLoaded>
+          </div>
         </div>
       </SignedIn>
-
-      <ThemeSwitch />
     </div>
   )
 }

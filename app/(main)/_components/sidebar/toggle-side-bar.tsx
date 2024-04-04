@@ -49,3 +49,16 @@ function ToggleSideBar() {
 }
 
 export default ToggleSideBar
+
+export const ToggleSideBarSkeleton = () => {
+  return (
+    <>
+      <div className='mb-2 flex w-full items-center p-3 pl-6 max-lg:hidden'>
+        <p className='font-semibold text-primary'>For you</p>
+        <Button size='icon' className='pointer-events-none ml-auto hover:bg-card' variant='ghost'>
+          <ArrowLeftFromLine className='size-4' />
+        </Button>
+      </div>
+    </>
+  )
+}

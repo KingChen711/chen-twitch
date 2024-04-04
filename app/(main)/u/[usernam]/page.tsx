@@ -7,8 +7,6 @@ type Props = {
 }
 
 async function UserPage({ searchParams }: Props) {
-  await new Promise((resolve) => setTimeout(resolve, 3000))
-
   return <div>UserPage: {searchParams?.username}</div>
 }
 

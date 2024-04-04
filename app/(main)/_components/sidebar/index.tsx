@@ -1,6 +1,6 @@
 import React from 'react'
 import Wrapper from './wrapper'
-import ToggleSideBar from './toggle-side-bar'
+import ToggleSideBar, { ToggleSideBarSkeleton } from './toggle-side-bar'
 import RecommendUsers, { RecommendUsersSkeleton } from './recommended-users'
 import { getRecommendedUsers } from '@/actions/recommend.action'
 
@@ -24,7 +24,10 @@ export default SideBar
 export const SideBarSkeleton = () => {
   return (
     <aside className='sticky left-0 z-50 flex h-full w-[70px] flex-col border-r border-card bg-muted lg:w-60'>
-      <RecommendUsersSkeleton />
+      <ToggleSideBarSkeleton />
+      <div className='space-y-4 pt-4 lg:pt-0'>
+        <RecommendUsersSkeleton />
+      </div>
     </aside>
   )
 }
