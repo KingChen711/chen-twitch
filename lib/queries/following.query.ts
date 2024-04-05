@@ -26,7 +26,7 @@ export const isFollowingUser = cache(async (otherUserId: string): Promise<boolea
   return !!existFollow
 })
 
-//* This method get the users that are follwed by the current user
+//* This method get the users that are followed by the current user
 export const getFollowedUsers = cache(async (): Promise<User[]> => {
   const currentUser = await whoAmI()
 
@@ -38,8 +38,8 @@ export const getFollowedUsers = cache(async (): Promise<User[]> => {
         followerId: currentUser.id
       },
       include: {
-        follwed: true
+        followed: true
       }
     })
-  ).map((follow) => follow.follwed)
+  ).map((follow) => follow.followed)
 })

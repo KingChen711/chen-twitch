@@ -12,18 +12,18 @@ export const followUser = async ({ followedUserId }: FollowUserParams) => {
     throw Error('Current user not found')
   }
 
+  if (currentUser.id === followedUserId) {
+    throw Error('Cannot follow your self')
+  }
+
   const followedUser = await getUserById({ id: followedUserId })
 
   if (!followedUser) {
     throw Error('Followed user not found')
   }
 
-  if (currentUser.id === followedUser.id) {
-    throw Error('Cannot follow your self')
-  }
-
   //* create new if not exist, and not update anything if exist
-  const follow = await prisma.follow.upsert({
+  const followData = prisma.follow.upsert({
     where: {
       followedId_followerId: {
         followedId: followedUser.id,
@@ -31,7 +31,7 @@ export const followUser = async ({ followedUserId }: FollowUserParams) => {
       }
     },
     include: {
-      follwed: true
+      followed: true
     },
     create: {
       followedId: followedUser.id,
@@ -39,6 +39,16 @@ export const followUser = async ({ followedUserId }: FollowUserParams) => {
     },
     update: {}
   })
+
+  //* Delete the block if exist, using deleteMany will not throw error if the block not exist
+  const blockData = prisma.block.deleteMany({
+    where: {
+      blockedId: followedUser.id,
+      blockerId: currentUser.id
+    }
+  })
+
+  const [follow] = await Promise.all([followData, blockData])
 
   revalidatePath(`/${followedUser?.username}`)
 
@@ -52,17 +62,16 @@ export const unfollowUser = async ({ followedUserId }: FollowUserParams) => {
     throw Error('Current user not found')
   }
 
+  if (currentUser.id === followedUserId) {
+    throw Error('Cannot unfollow your self')
+  }
+
   const followedUser = await getUserById({ id: followedUserId })
 
   if (!followedUser) {
     throw Error('Followed user not found')
   }
 
-  if (currentUser.id === followedUser.id) {
-    throw Error('Cannot unfollow your self')
-  }
-
-  //* create new if not exist, and not update anything if exist
   const follow = await prisma.follow.delete({
     where: {
       followedId_followerId: {
@@ -71,7 +80,7 @@ export const unfollowUser = async ({ followedUserId }: FollowUserParams) => {
       }
     },
     include: {
-      follwed: true
+      followed: true
     }
   })
 

@@ -18,7 +18,7 @@ const UserItem = ({ imageUrl, isLive, username }: Props) => {
   const pathname = usePathname()
   const { isCollapsed } = useSideBar()
 
-  const href = `/u/${username}`
+  const href = `/${username}`
   const isActive = pathname === href
 
   return (

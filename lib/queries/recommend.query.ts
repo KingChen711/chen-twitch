@@ -17,18 +17,38 @@ export const getRecommendedUsers = cache(async () => {
   if (currentUser) {
     query.where = {
       AND: [
-        // exclude by self
+        //* exclude by self
         {
           NOT: {
             id: currentUser.id
           }
         },
-        // exclude users who be following by current user
+        //* exclude users who be following by current user
         {
           NOT: {
             followers: {
               some: {
                 followerId: currentUser.id
+              }
+            }
+          }
+        },
+        //* exclude users who be blocked by current user
+        {
+          NOT: {
+            blockers: {
+              some: {
+                blockerId: currentUser.id
+              }
+            }
+          }
+        },
+        //* exclude users who be blocking current user
+        {
+          NOT: {
+            blockings: {
+              some: {
+                blockedId: currentUser.id
               }
             }
           }

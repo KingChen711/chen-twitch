@@ -27,3 +27,8 @@ export type DeleteUserParams = {
 export type FollowUserParams = {
   followedUserId: string
 }
+
+//* Block Params
+export type BlockUserParams = {
+  blockedUserId: string
+}
