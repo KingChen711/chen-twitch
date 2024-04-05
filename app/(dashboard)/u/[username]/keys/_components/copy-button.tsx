@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { CheckCheck, Copy } from 'lucide-react'
+import { toast } from 'sonner'
 
 type Props = {
   value: string | null
@@ -17,6 +18,7 @@ export default function CopyButton({ value }: Props) {
 
     setHasCopied(true)
     navigator.clipboard.writeText(value)
+    toast.success('Copied to clipboard')
 
     setTimeout(() => {
       setHasCopied(false)

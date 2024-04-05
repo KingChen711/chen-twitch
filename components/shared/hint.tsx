@@ -1,7 +1,9 @@
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
+import { LucideIcon } from 'lucide-react'
 
 type Props = {
+  icon?: LucideIcon
   label: string
   children: React.ReactNode
   asChild?: boolean
@@ -9,13 +11,16 @@ type Props = {
   align?: 'start' | 'center' | 'end'
 }
 
-function Hint({ children, label, align, asChild, side }: Props) {
+function Hint({ children, label, align, asChild, side, icon: Icon }: Props) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={0}>
         <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
         <TooltipContent className='bg-foreground text-background' side={side} align={align}>
-          <p className='font-semibold'>{label}</p>
+          <p className='flex items-center gap-2 font-semibold'>
+            {Icon ? <Icon className='size-4' /> : null}
+            {label}
+          </p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

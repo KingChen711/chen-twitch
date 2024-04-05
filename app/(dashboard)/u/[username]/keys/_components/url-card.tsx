@@ -14,7 +14,7 @@ function UrlCard({ value = '' }: Props) {
 
         <div className='w-full space-y-2'>
           <div className='flex w-full items-center gap-x-2'>
-            <Input value={value ?? ''} disabled placeholder='Server URL' />
+            <Input value={value ?? ''} disabled placeholder='Server URL' className='bg-transparent' />
 
             <CopyButton value={value} />
           </div>
