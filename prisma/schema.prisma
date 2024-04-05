@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextIndex", "fullTextSearch"]
 }
 
 datasource db {
@@ -18,9 +19,33 @@ model User {
   followings Follow[] @relation("Following")
   blockers   Block[]  @relation("BlockedBy")
   blockings  Block[]  @relation("Blocking")
+  stream     Stream?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Stream {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  name         String  @db.String
+  thumbnailUrl String? @db.String
+
+  ingressId String? @unique
+  serverUrl String? @unique @db.String
+  streamKey String? @unique @db.String
+
+  isLive              Boolean @default(false)
+  isChatEnabled       Boolean @default(true)
+  isChatDelayed       Boolean @default(false)
+  isChatFollowersOnly Boolean @default(false)
+
+  streamerId String @unique @db.ObjectId // a user only have one or zero stream
+  streamer   User   @relation(fields: [streamerId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@fulltext([name])
 }
 
 model Follow {
@@ -30,7 +55,7 @@ model Follow {
   followerId String @db.ObjectId
 
   follower User @relation(name: "Following", fields: [followerId], references: [id])
-  followed  User @relation(name: "FollowedBy", fields: [followedId], references: [id])
+  followed User @relation(name: "FollowedBy", fields: [followedId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

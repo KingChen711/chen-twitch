@@ -32,3 +32,15 @@ export type FollowUserParams = {
 export type BlockUserParams = {
   blockedUserId: string
 }
+
+//* Stream Params
+export type GetStreamByUserId = {
+  userId: string
+}
+
+export type UpdateStreamParams = {
+  name?: string
+  isChatEnabled?: boolean
+  isChatDelayed?: boolean
+  isChatFollowersOnly?: boolean
+}
