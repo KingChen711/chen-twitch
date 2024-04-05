@@ -5,15 +5,10 @@ import { getStreamByUserId } from '@/lib/queries/stream.query'
 import UrlCard from './_components/url-card'
 import KeyCard from './_components/key-card'
 import ConnectModal from './_components/connect-modal'
-import NotFoundStream from '../_components/not-found-stream'
 
 async function KeysPage() {
   const currentUser = (await whoAmI())!
   const stream = await getStreamByUserId({ userId: currentUser.id })
-
-  if (!stream) {
-    return <NotFoundStream username={currentUser.username} />
-  }
 
   return (
     <div className='w-full p-6'>
@@ -23,8 +18,8 @@ async function KeysPage() {
       </div>
 
       <div className='space-y-4'>
-        <UrlCard value={stream.serverUrl} />
-        <KeyCard value={stream.streamKey} />
+        <UrlCard value={stream?.serverUrl ?? ''} />
+        <KeyCard value={stream?.streamKey ?? ''} />
       </div>
     </div>
   )

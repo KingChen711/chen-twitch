@@ -10,26 +10,16 @@ type Props = {
 function NotFoundStream({ username }: Props) {
   return (
     <div className='mt-10 flex w-full flex-col items-center justify-center'>
-      <Image
-        src='/assets/images/light-illustration.png'
-        alt='no result'
-        width={270}
-        height={270}
-        className='block object-contain dark:hidden'
-      />
-      <Image
-        src='/assets/images/dark-illustration.png'
-        alt='no result'
-        width={270}
-        height={270}
-        className='hidden object-contain dark:flex'
-      />
+      <Image src='/no-result.png' alt='no result' width={270} height={270} className='object-contain' />
       <h2 className='mt-8 text-[24px] font-bold leading-[31.2px]'>No Stream Found</h2>
-      <p className='my-3.5 max-w-md text-center'>description</p>
+      <p className='my-3.5 max-w-md text-center'>
+        Sorry. Unless you’ve got a time machine, that content is unavailable. Let&apos;s generate keys and urls to setup
+        for your streaming.
+      </p>
 
-      <Link href={`/u/${username}`}>
+      <Link href={`/u/${username}/keys`}>
         <Button className='mt-5 min-h-[46px] rounded-lg bg-indigo-600 px-4 py-3 text-white hover:bg-indigo-600 dark:bg-indigo-600'>
-          Create Stream
+          Generate Connection
         </Button>
       </Link>
     </div>
