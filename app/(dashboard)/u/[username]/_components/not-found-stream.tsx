@@ -13,12 +13,12 @@ function NotFoundStream({ username }: Props) {
       <Image src='/no-result.png' alt='no result' width={270} height={270} className='object-contain' />
       <h2 className='mt-8 text-[24px] font-bold leading-[31.2px]'>No Stream Found</h2>
       <p className='my-3.5 max-w-md text-center'>
-        Sorry. Unless you’ve got a time machine, that content is unavailable. Let&apos;s generate keys and urls to setup
+        Sorry. Unless you’ve got a time machine, that content is unavailable. Let&apos;s generate a connection to setup
         for your streaming.
       </p>
 
       <Link href={`/u/${username}/keys`}>
-        <Button className='mt-5 min-h-[46px] rounded-lg bg-indigo-600 px-4 py-3 text-white hover:bg-indigo-600 dark:bg-indigo-600'>
+        <Button className='mt-5 min-h-[46px] rounded-lg bg-primary px-4 py-3 text-white hover:bg-primary dark:bg-primary'>
           Generate Connection
         </Button>
       </Link>

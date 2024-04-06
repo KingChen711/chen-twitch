@@ -1,7 +1,7 @@
 import { cache } from 'react'
 import prisma from '../prisma'
 import { whoAmI } from './user.query'
-import { Stream, User } from '@prisma/client'
+import { User } from '@prisma/client'
 
 //* This method check if another user is followed by current user.
 export const isFollowingUser = cache(async (otherUserId: string): Promise<boolean> => {
@@ -40,10 +40,14 @@ export const getFollowedUsers = cache(async () => {
       include: {
         followed: {
           include: {
-            stream: true
+            stream: {
+              select: {
+                isLive: true
+              }
+            }
           }
         }
       }
     })
-  ).map((follow) => follow.followed) as (User & { stream: Stream | null })[]
+  ).map((follow) => follow.followed) as (User & { stream: { isLive: boolean } | null })[]
 })

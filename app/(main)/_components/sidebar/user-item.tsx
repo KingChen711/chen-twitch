@@ -26,17 +26,19 @@ const UserItem = ({ imageUrl, isLive, username }: Props) => {
       asChild
       variant='ghost'
       className={cn(
-        'w-full h-12 hover:bg-background',
+        'w-full h-14 hover:bg-background',
         isCollapsed ? 'justify-center' : 'justify-start',
-        isActive && 'bg-background'
+        isActive && 'bg-background border-l-2',
+        isActive && !isCollapsed && 'border-primary rounded-l-none'
       )}
     >
-      <Link href={href}>
-        <div className={cn('flex items-center w-full gap-x-4 max-lg:justify-center', isCollapsed && 'justify-center')}>
-          <UserAvatar imageUrl={imageUrl} isLive={isLive} username={username} sideBar />
-          {!isCollapsed && <p className='truncate max-lg:hidden'>{username}</p>}
-          {!isCollapsed && isLive && <LiveBadge className='ml-auto max-lg:hidden' />}
-        </div>
+      <Link
+        href={href}
+        className={cn('flex items-center w-full gap-x-4 max-lg:justify-center', isCollapsed && 'justify-center')}
+      >
+        <UserAvatar imageUrl={imageUrl} isLive={isLive} username={username} sideBar />
+        {!isCollapsed && <p className='truncate max-lg:hidden'>{username}</p>}
+        {!isCollapsed && isLive && <LiveBadge className='ml-auto max-lg:hidden' />}
       </Link>
     </Button>
   )

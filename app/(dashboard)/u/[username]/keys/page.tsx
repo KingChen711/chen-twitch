@@ -14,7 +14,7 @@ async function KeysPage() {
     <div className='w-full p-6'>
       <div className='mb-4 flex items-center justify-between'>
         <h1 className='text-2xl font-bold'>Keys & URLs</h1>
-        <ConnectModal />
+        <ConnectModal alreadyHasKeyAndUrl={!!stream} />
       </div>
 
       <div className='space-y-4'>

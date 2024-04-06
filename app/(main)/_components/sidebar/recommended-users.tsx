@@ -2,11 +2,11 @@
 
 import React from 'react'
 import { useSideBar } from '@/store/use-side-bar'
-import { User, Stream } from '@prisma/client'
+import { User } from '@prisma/client'
 import UserItem, { UserItemSkeleton } from './user-item'
 
 type Props = {
-  data: (User & { stream: Stream | null })[]
+  data: (User & { stream: { isLive: boolean } | null })[]
 }
 
 function RecommendUsers({ data }: Props) {

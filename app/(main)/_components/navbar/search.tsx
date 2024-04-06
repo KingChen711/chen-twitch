@@ -35,23 +35,26 @@ function Search() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='relative flex w-full max-w-[400px] items-center'>
+    <form
+      onSubmit={handleSubmit}
+      className='relative flex w-full max-w-[400px] items-center rounded-md border-2 border-foreground/15 bg-card'
+    >
       <Input
         ref={inputRef}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder='Search...'
-        className='rounded-r-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0'
+        className='rounded-none border-none bg-transparent focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0'
       />
 
       {searchTerm && (
         <X
           onClick={clearSearchTerm}
-          className='absolute right-14 top-2.5 size-5 cursor-pointer text-muted-foreground transition hover:opacity-75'
+          className='absolute right-10 top-2.5 size-5 cursor-pointer text-muted-foreground transition hover:opacity-75'
         />
       )}
 
-      <Button type='submit' size='sm' variant='secondary' className='rounded-l-none'>
+      <Button type='submit' size='icon' className='cursor-default rounded-l-none bg-transparent hover:bg-transparent'>
         <SearchIcon className='size-5 text-muted-foreground' />
       </Button>
     </form>

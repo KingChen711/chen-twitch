@@ -17,10 +17,18 @@ function NavItem({ href, icon: Icon, isActive, label }: Props) {
   const { isCollapsed } = useCreatorSideBar()
 
   return (
-    <Button asChild variant='ghost' className={cn('w-full h-12 flex hover:bg-background', isActive && 'bg-background')}>
+    <Button
+      asChild
+      variant='ghost'
+      className={cn(
+        'w-full h-12 flex hover:bg-background hover:text-primary hover:font-extrabold',
+        isActive && 'bg-background text-primary border-l-2 font-extrabold',
+        isActive && !isCollapsed && 'border-primary rounded-l-none'
+      )}
+    >
       <Link href={href}>
         <div className='flex w-full items-center justify-start gap-x-4'>
-          <Icon className={cn('size-4 max-md:mr-0', isCollapsed ? 'mr-0' : 'mr-2')} />
+          <Icon scale={1} size={20} className={cn('max-md:mr-0', isCollapsed ? 'mr-0' : 'mr-2')} />
           {!isCollapsed && <span className='max-md:hidden'>{label}</span>}
         </div>
       </Link>

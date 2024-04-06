@@ -19,7 +19,11 @@ const WHIP = String(IngressInput.WHIP_INPUT)
 
 type IngressType = typeof RTMP | typeof WHIP
 
-function ConnectModal() {
+type Props = {
+  alreadyHasKeyAndUrl: boolean
+}
+
+function ConnectModal({ alreadyHasKeyAndUrl }: Props) {
   const [pending, startTransition] = useTransition()
   const [openDialog, setOpenDialog] = useState(false)
   const [ingressType, setIngressType] = useState<IngressType>(RTMP)
@@ -58,13 +62,15 @@ function ConnectModal() {
           </SelectContent>
         </Select>
 
-        <Alert className='border-amber-500'>
-          <AlertTriangle className='size-4 stroke-amber-500' />
-          <AlertTitle className='font-semibold text-amber-500'>Warning</AlertTitle>
-          <AlertDescription className='text-amber-500'>
-            This action will reset all active streams using the current connection
-          </AlertDescription>
-        </Alert>
+        {alreadyHasKeyAndUrl && (
+          <Alert className='border-amber-400'>
+            <AlertTriangle className='size-4 stroke-amber-400' />
+            <AlertTitle className='font-semibold text-amber-400'>Warning</AlertTitle>
+            <AlertDescription className='text-amber-400'>
+              You already have a connection. This action will reset all active streams using the current connection.
+            </AlertDescription>
+          </Alert>
+        )}
 
         <div className='flex justify-end gap-4'>
           <DialogClose asChild>

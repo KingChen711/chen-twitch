@@ -24,7 +24,7 @@ function Toggle() {
   return (
     <>
       {isCollapsed && (
-        <div className='mb-4 hidden w-full items-center pt-4 lg:flex'>
+        <div className='mb-4 hidden justify-center pt-4 lg:flex'>
           <Hint label={label} side='right' asChild>
             <Button onClick={expand} variant='ghost' className='h-auto p-2'>
               <ArrowRightFromLine className='size-4' />
@@ -34,7 +34,7 @@ function Toggle() {
       )}
       {!isCollapsed && (
         <div className='mb-2 hidden w-full items-center p-3 pl-6 lg:flex'>
-          <p className='font-semibold text-primary'>Dashboard</p>
+          <p className='font-semibold'>Dashboard</p>
 
           <Hint label={label} side='right' asChild>
             <Button onClick={collapse} variant='ghost' className='ml-auto h-auto p-2'>

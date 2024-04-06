@@ -28,7 +28,7 @@ function KeyCard({ value = '' }: Props) {
               className='bg-transparent'
             />
 
-            <Button onClick={() => setShow(!show)} size='sm' variant='link'>
+            <Button onClick={() => setShow(!show)} size='sm' variant='link' className='text-foreground'>
               {show ? <EyeOff /> : <Eye />}
             </Button>
             <CopyButton value={value} />
