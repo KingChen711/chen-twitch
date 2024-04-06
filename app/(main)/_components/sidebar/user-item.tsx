@@ -25,7 +25,11 @@ const UserItem = ({ imageUrl, isLive, username }: Props) => {
     <Button
       asChild
       variant='ghost'
-      className={cn('w-full h-12', isCollapsed ? 'justify-center' : 'justify-start', isActive && 'bg-background')}
+      className={cn(
+        'w-full h-12 hover:bg-background',
+        isCollapsed ? 'justify-center' : 'justify-start',
+        isActive && 'bg-background'
+      )}
     >
       <Link href={href}>
         <div className={cn('flex items-center w-full gap-x-4 justify-center')}>

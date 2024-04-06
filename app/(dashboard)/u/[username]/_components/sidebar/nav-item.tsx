@@ -17,7 +17,7 @@ function NavItem({ href, icon: Icon, isActive, label }: Props) {
   const { isCollapsed } = useCreatorSideBar()
 
   return (
-    <Button asChild variant='ghost' className={cn('w-full h-12 flex', isActive && 'bg-accent')}>
+    <Button asChild variant='ghost' className={cn('w-full h-12 flex hover:bg-background', isActive && 'bg-background')}>
       <Link href={href}>
         <div className='flex w-full items-center justify-start gap-x-4'>
           <Icon className={cn('size-4 max-md:mr-0', isCollapsed ? 'mr-0' : 'mr-2')} />
