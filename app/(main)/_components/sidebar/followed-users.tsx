@@ -1,12 +1,12 @@
 'use client'
 
 import { useSideBar } from '@/store/use-side-bar'
-import { User } from '@prisma/client'
+import { Stream, User } from '@prisma/client'
 import React from 'react'
 import UserItem, { UserItemSkeleton } from './user-item'
 
 type Props = {
-  data: User[]
+  data: (User & { stream: Stream | null })[]
 }
 
 function FollowedUsers({ data }: Props) {
@@ -28,7 +28,7 @@ function FollowedUsers({ data }: Props) {
             key={followedUser.id}
             imageUrl={followedUser.imageUrl}
             username={followedUser.username}
-            isLive={true}
+            isLive={!!followedUser.stream?.isLive}
           />
         ))}
       </ul>

@@ -32,7 +32,7 @@ const UserItem = ({ imageUrl, isLive, username }: Props) => {
       )}
     >
       <Link href={href}>
-        <div className={cn('flex items-center w-full gap-x-4 justify-center')}>
+        <div className={cn('flex items-center w-full gap-x-4 max-lg:justify-center', isCollapsed && 'justify-center')}>
           <UserAvatar imageUrl={imageUrl} isLive={isLive} username={username} sideBar />
           {!isCollapsed && <p className='truncate max-lg:hidden'>{username}</p>}
           {!isCollapsed && isLive && <LiveBadge className='ml-auto max-lg:hidden' />}

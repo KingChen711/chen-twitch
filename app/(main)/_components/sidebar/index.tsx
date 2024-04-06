@@ -17,7 +17,7 @@ async function SideBar() {
   return (
     <Wrapper>
       <ToggleSideBar />
-      <div className='space-y-4 pt-4 lg:pt-0'>
+      <div className='pt-4 lg:space-y-4 lg:pt-0'>
         <FollowedUsers data={followedUsers} />
         <RecommendUsers data={recommendUsers} />
       </div>

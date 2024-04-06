@@ -2,11 +2,11 @@
 
 import React from 'react'
 import { useSideBar } from '@/store/use-side-bar'
-import { User } from '@prisma/client'
+import { User, Stream } from '@prisma/client'
 import UserItem, { UserItemSkeleton } from './user-item'
 
 type Props = {
-  data: User[]
+  data: (User & { stream: Stream | null })[]
 }
 
 function RecommendUsers({ data }: Props) {
@@ -24,7 +24,7 @@ function RecommendUsers({ data }: Props) {
 
       <ul className='space-y-2 px-2'>
         {data.map((user) => (
-          <UserItem key={user.id} imageUrl={user.imageUrl} username={user.username} isLive />
+          <UserItem key={user.id} imageUrl={user.imageUrl} username={user.username} isLive={!!user.stream?.isLive} />
         ))}
       </ul>
     </div>

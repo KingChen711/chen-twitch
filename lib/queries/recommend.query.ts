@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, Stream, User } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
 import { cache } from 'react'
 import { whoAmI } from './user.query'
@@ -11,6 +11,9 @@ export const getRecommendedUsers = cache(async () => {
   const query: Prisma.UserFindManyArgs<DefaultArgs> = {
     orderBy: {
       createdAt: 'desc'
+    },
+    include: {
+      stream: true
     }
   }
 
@@ -57,5 +60,5 @@ export const getRecommendedUsers = cache(async () => {
     }
   }
 
-  return prisma.user.findMany(query)
+  return (await prisma.user.findMany(query)) as (User & { stream: Stream | null })[]
 })
