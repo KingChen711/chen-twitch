@@ -3,6 +3,9 @@
 import { useConnectionState, useRemoteParticipant, useTracks } from '@livekit/components-react'
 import { ConnectionState, Track } from 'livekit-client'
 import React from 'react'
+import OfflineVideo from './offline-video'
+import LoadingVideo from './loading-video'
+import LiveVideo from './live-video'
 
 type Props = {
   hostName: string
@@ -19,11 +22,11 @@ function Video({ hostIdentity, hostName }: Props) {
   let content
 
   if (!participant && connectionState === ConnectionState.Connected) {
-    content = <p>Host if offline</p>
+    content = <OfflineVideo username={hostName} />
   } else if (!participant && tracks.length === 0) {
-    content = <p>Loading...</p>
+    content = <LoadingVideo label={connectionState} />
   } else {
-    content = <p>Live video</p>
+    content = <LiveVideo participant={participant} />
   }
 
   return <div className='group relative aspect-video border-b'>{content}</div>

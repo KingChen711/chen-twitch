@@ -13,7 +13,7 @@ async function CreatorPage() {
   }
 
   return (
-    <div className='h-full'>
+    <div className='w-full'>
       <StreamPlayer user={creator} stream={stream} isSelf />
     </div>
   )

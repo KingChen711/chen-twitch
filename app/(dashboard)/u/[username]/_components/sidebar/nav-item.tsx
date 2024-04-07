@@ -21,8 +21,8 @@ function NavItem({ href, icon: Icon, isActive, label }: Props) {
       asChild
       variant='ghost'
       className={cn(
-        'w-full h-12 flex hover:bg-background hover:text-primary hover:font-extrabold',
-        isActive && 'bg-background text-primary border-l-2 font-extrabold',
+        'w-full h-12 flex hover:bg-background hover:font-extrabold',
+        isActive && 'bg-background border-l-2 font-extrabold',
         isActive && !isCollapsed && 'border-primary rounded-l-none'
       )}
     >

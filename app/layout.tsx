@@ -5,6 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 import { Providers } from './providers'
 import { Toaster } from '@/components/ui/sonner'
+import TailwindIndicator from '@/components/shared/tailwind-indicator'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Providers>{children}</Providers>
           <Toaster position='bottom-center' />
+          <TailwindIndicator />
         </body>
       </html>
     </ClerkProvider>
