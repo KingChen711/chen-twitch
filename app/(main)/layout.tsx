@@ -14,7 +14,7 @@ export default function MainLayout({
         <Suspense fallback={<SideBarSkeleton />}>
           <SideBar />
         </Suspense>
-        <main className='flex-1 pt-20'>{children}</main>
+        <section className='flex-1 pt-20'>{children}</section>
       </div>
     </main>
   )

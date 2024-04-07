@@ -2,7 +2,7 @@
 
 import { Maximize, Minimize } from 'lucide-react'
 import React from 'react'
-import Hint from '../hint'
+import Hint from '../../hint'
 
 type Props = {
   isFullScreen: boolean
@@ -17,7 +17,7 @@ function FullScreenControl({ isFullScreen, onToggle }: Props) {
   return (
     <div className='flex items-center justify-center gap-4'>
       <Hint label={label} asChild>
-        <button onClick={onToggle} className='rounded-lg text-primary-foreground hover:bg-primary/10'>
+        <button onClick={onToggle} className='rounded-lg text-foreground hover:bg-primary/10'>
           <Icon className='size-5' />
         </button>
       </Hint>

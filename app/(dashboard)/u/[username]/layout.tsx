@@ -23,7 +23,7 @@ export default async function CreatorLayout({ children, params }: Props) {
       <NavBar />
       <div className='flex'>
         <SideBar />
-        <div className='flex h-dvh w-full pt-20'>{children}</div>
+        <section className='flex-1 pt-20'>{children}</section>
       </div>
     </main>
   )

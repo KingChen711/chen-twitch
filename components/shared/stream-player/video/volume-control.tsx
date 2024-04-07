@@ -2,7 +2,7 @@
 
 import { Volume1, Volume2, VolumeX } from 'lucide-react'
 import React from 'react'
-import Hint from '../hint'
+import Hint from '../../hint'
 import { Slider } from '@/components/ui/slider'
 
 type Props = {
@@ -26,7 +26,7 @@ function VolumeControl({ onChange, onToggle, value }: Props) {
   return (
     <div className='flex items-center gap-2'>
       <Hint label={label} asChild>
-        <button onClick={onToggle} className='rounded-lg p-1.5 text-primary-foreground hover:bg-primary/10'>
+        <button onClick={onToggle} className='rounded-lg p-1.5 text-foreground hover:bg-primary/10'>
           <Icon className='size-6' />
         </button>
       </Hint>

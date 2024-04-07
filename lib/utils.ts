@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import queryString from 'query-string'
+import stc from 'string-to-color'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -25,4 +26,8 @@ export function formUrlQuery({ params, key, value, url }: UrlQueryParams) {
     },
     { skipNull: true }
   )
+}
+
+export const stringToColor = (str: string) => {
+  return stc(str)
 }
