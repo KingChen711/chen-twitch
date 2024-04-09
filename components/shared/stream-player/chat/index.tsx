@@ -5,10 +5,11 @@ import { useMedia } from 'react-use'
 import { ChatVariant, useChatSideBar } from '@/store/use-chat-side-bar'
 import { ConnectionState } from 'livekit-client'
 import { useChat, useConnectionState, useRemoteParticipant } from '@livekit/components-react'
-import ChatHeader from './chat-header'
-import ChatForm from './chat-form'
+import ChatHeader, { ChatHeaderSkeleton } from './chat-header'
+import ChatForm, { ChatFormSkeleton } from './chat-form'
 import ChatInfo from './chat-info'
-import ChatList from './chat-list'
+import ChatList, { ChatListSkeleton } from './chat-list'
+import ChatCommunity from './chat-community'
 
 type Props = {
   viewerName: string
@@ -26,7 +27,7 @@ function Chat({
   isChatDelayed,
   isChatEnabled,
   isChatFollowersOnly,
-  // viewerName,
+  viewerName,
   isFollowing
 }: Props) {
   const matches = useMedia('(max-width: 1024px)')
@@ -65,7 +66,7 @@ function Chat({
   }
 
   return (
-    <div className='flex h-[calc(100vh-80px)] flex-col border-b border-l bg-muted py-0'>
+    <div className='flex h-[calc(100dvh-80px)] flex-col border-b border-l bg-muted py-0 lg:sticky lg:right-0 lg:top-20'>
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>
@@ -91,12 +92,20 @@ function Chat({
         </>
       )}
       {variant === ChatVariant.COMMUNITY && (
-        <>
-          <p>Community</p>
-        </>
+        <ChatCommunity viewerName={viewerName} hostName={hostName} isHidden={isHidden} />
       )}
     </div>
   )
 }
 
 export default Chat
+
+export const ChatSkeleton = () => {
+  return (
+    <div className='flex h-[calc(100vh-80px)] flex-col border-2 border-b border-l bg-muted pt-0'>
+      <ChatHeaderSkeleton />
+      <ChatListSkeleton />
+      <ChatFormSkeleton />
+    </div>
+  )
+}

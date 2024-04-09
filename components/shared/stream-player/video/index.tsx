@@ -6,6 +6,7 @@ import React from 'react'
 import OfflineVideo from './offline-video'
 import LoadingVideo from './loading-video'
 import LiveVideo from './live-video'
+import { Skeleton } from '@/components/ui/skeleton'
 
 type Props = {
   hostName: string
@@ -33,3 +34,11 @@ function Video({ hostIdentity, hostName }: Props) {
 }
 
 export default Video
+
+export const VideoSkeleton = () => {
+  return (
+    <div className='aspect-video border-x border-background'>
+      <Skeleton className='size-full rounded-none bg-primary' />
+    </div>
+  )
+}

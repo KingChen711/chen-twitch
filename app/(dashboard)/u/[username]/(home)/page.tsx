@@ -1,20 +1,25 @@
-import { getStreamByUserId } from '@/lib/queries/stream.query'
 import React from 'react'
 import NotFoundStream from '../_components/not-found-stream'
-import { whoAmI } from '@/lib/queries/user.query'
+import { getCreator } from '@/lib/queries/user.query'
 import StreamPlayer from '@/components/shared/stream-player'
 
-async function CreatorPage() {
-  const creator = (await whoAmI())!
-  const stream = await getStreamByUserId({ userId: creator.id })
+type Props = {
+  params: {
+    username: string
+  }
+}
+
+async function CreatorPage({ params }: Props) {
+  const creator = (await getCreator({ username: params.username }))!
+  const stream = creator.stream
 
   if (!stream) {
     return <NotFoundStream username={creator.username} />
   }
 
   return (
-    <div className='w-full'>
-      <StreamPlayer user={creator} stream={stream} isSelf />
+    <div className='relative w-full'>
+      <StreamPlayer user={creator} stream={stream} />
     </div>
   )
 }

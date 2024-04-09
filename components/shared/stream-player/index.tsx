@@ -4,17 +4,20 @@ import React from 'react'
 import { Stream, User } from '@prisma/client'
 import useViewerToken from '@/hook/use-viewer-token'
 import { LiveKitRoom } from '@livekit/components-react'
-import Video from './video'
+import Video, { VideoSkeleton } from './video'
 import { useChatSideBar } from '@/store/use-chat-side-bar'
 import { cn } from '@/lib/utils'
-import Chat from './chat'
+import Chat, { ChatSkeleton } from './chat'
 import ChatToggle from './chat/chat-toggle'
+import Header from './header'
+import { HeaderSkeleton } from './header/actions'
+import InfoCard from './info-card'
+import AboutCard from './about-card'
 
 type Props = {
-  user: User
+  user: User & { _count: { followers: number } }
   stream: Stream
   isFollowing?: boolean
-  isSelf?: boolean
 }
 
 function StreamPlayer({ stream, user, isFollowing = false }: Props) {
@@ -23,7 +26,11 @@ function StreamPlayer({ stream, user, isFollowing = false }: Props) {
   const { isCollapsed } = useChatSideBar()
 
   if (!token || !name || !identity) {
-    return <div>Cannot watch the stream</div>
+    return (
+      <div>
+        <StreamPlayerSkeleton />
+      </div>
+    )
   }
 
   console.log({ isCollapsed })
@@ -45,6 +52,27 @@ function StreamPlayer({ stream, user, isFollowing = false }: Props) {
       >
         <div className='hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5'>
           <Video hostName={user.username} hostIdentity={user.id} />
+          <Header
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            imageUrl={user.imageUrl}
+            isFollowing={isFollowing}
+            name={stream.name}
+          />
+          <InfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            name={stream.name}
+            thumbnailUrl={stream.thumbnailUrl}
+          />
+          <AboutCard
+            hostIdentity={user.id}
+            hostName={user.username}
+            bio={user.bio}
+            viewerIdentity={identity}
+            followedByCount={user._count.followers}
+          />
         </div>
 
         <div className={cn('col-span-1', isCollapsed && 'hidden')}>
@@ -64,3 +92,18 @@ function StreamPlayer({ stream, user, isFollowing = false }: Props) {
 }
 
 export default StreamPlayer
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className='grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6'>
+      <div className='hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5'>
+        <VideoSkeleton />
+        <HeaderSkeleton />
+      </div>
+
+      <div className='col-span-1 bg-background'>
+        <ChatSkeleton />
+      </div>
+    </div>
+  )
+}

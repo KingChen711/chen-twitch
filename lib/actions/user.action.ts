@@ -2,7 +2,9 @@
 
 import prisma from '@/lib/prisma'
 
-import { CreateUserParams, DeleteUserParams, UpdateUserParams } from '../param'
+import { CreateUserParams, DeleteUserParams, UpdateUserBio, UpdateUserParams } from '../param'
+import { revalidatePath } from 'next/cache'
+import { whoAmI } from '../queries/user.query'
 
 export const createUser = async (params: CreateUserParams) => {
   return await prisma.user.create({
@@ -27,4 +29,24 @@ export const deleteUser = async (params: DeleteUserParams) => {
       clerkId: params.clerkId
     }
   })
+}
+
+export const updateUserBio = async ({ bio }: UpdateUserBio) => {
+  const currentUser = await whoAmI()
+
+  if (!currentUser) {
+    throw Error('User not found')
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: currentUser.id
+    },
+    data: { bio }
+  })
+
+  revalidatePath(`/${currentUser.username}`)
+  revalidatePath(`/u/${currentUser.username}`)
+
+  return updatedUser
 }

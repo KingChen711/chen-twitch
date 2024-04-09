@@ -1,5 +1,5 @@
 import { auth } from '@clerk/nextjs'
-import { GetUserByIdParams, GetUserByUsernameParams } from '../param'
+import { GetCreatorParams, GetUserByIdParams, GetUserByUsernameParams } from '../param'
 import prisma from '../prisma'
 import { cache } from 'react'
 
@@ -26,3 +26,17 @@ export const whoAmI = cache(async () => {
     where: { clerkId }
   })
 })
+
+export const getCreator = async ({ username }: GetCreatorParams) => {
+  return await prisma.user.findUnique({
+    where: { username },
+    include: {
+      stream: true,
+      _count: {
+        select: {
+          followers: true
+        }
+      }
+    }
+  })
+}

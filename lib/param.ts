@@ -16,11 +16,18 @@ export type CreateUserParams = {
 export type UpdateUserParams = {
   username: string
   imageUrl?: string
-  bio?: string
+}
+
+export type UpdateUserBio = {
+  bio: string
 }
 
 export type DeleteUserParams = {
   clerkId: string
+}
+
+export type GetCreatorParams = {
+  username: string
 }
 
 //* Follow Params
@@ -39,6 +46,7 @@ export type GetStreamByUserId = {
 }
 
 export type UpdateStreamParams = {
+  thumbnailUrl?: string | null
   name?: string
   isChatEnabled?: boolean
   isChatDelayed?: boolean

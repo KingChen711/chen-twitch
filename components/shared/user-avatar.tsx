@@ -49,8 +49,10 @@ function UserAvatar({ imageUrl, isLive, username, showBadge, size }: Props) {
 
 export default UserAvatar
 
-interface SkeletonProps extends VariantProps<typeof avatarSizes> {}
+interface SkeletonProps extends VariantProps<typeof avatarSizes> {
+  className?: string
+}
 
-export const UserAvatarSkeleton = ({ size }: SkeletonProps) => {
-  return <Skeleton className={cn('rounded-full', avatarSizes({ size }))} />
+export const UserAvatarSkeleton = ({ size, className }: SkeletonProps) => {
+  return <Skeleton className={cn('rounded-full', avatarSizes({ size }), className)} />
 }
