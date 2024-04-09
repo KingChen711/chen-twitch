@@ -10,8 +10,7 @@ export const isFollowingUser = cache(async (otherUserId: string): Promise<boolea
   if (!currentUser) return false
 
   if (currentUser.id === otherUserId) {
-    // ?Business rules: User always following by self
-    return true
+    return false
   }
 
   const existFollow = await prisma.follow.findUnique({

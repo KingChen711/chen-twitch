@@ -8,7 +8,14 @@ import { whoAmI } from '../queries/user.query'
 
 export const createUser = async (params: CreateUserParams) => {
   return await prisma.user.create({
-    data: params
+    data: {
+      ...params,
+      stream: {
+        create: {
+          name: params.username
+        }
+      }
+    }
   })
 }
 

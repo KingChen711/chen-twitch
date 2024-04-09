@@ -57,7 +57,7 @@ function ChatInfo({ isDelayed, isFollowersOnly, isChatEnabled, isOnline, hostNam
     return ''
   }, [isDelayed, isFollowersOnly, isOnline, isChatEnabled])
 
-  if (!isDelayed && !isFollowersOnly) return null
+  if (isOnline && !isChatEnabled && !isDelayed && !isFollowersOnly) return null
 
   return (
     <div className='flex w-full items-center gap-x-2 rounded-t-md border-foreground/10 bg-foreground/5 p-2 text-muted-foreground'>

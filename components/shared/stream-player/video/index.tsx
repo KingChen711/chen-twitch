@@ -38,7 +38,7 @@ export default Video
 export const VideoSkeleton = () => {
   return (
     <div className='aspect-video border-x border-background'>
-      <Skeleton className='size-full rounded-none bg-primary' />
+      <Skeleton className='size-full rounded-none bg-muted' />
     </div>
   )
 }

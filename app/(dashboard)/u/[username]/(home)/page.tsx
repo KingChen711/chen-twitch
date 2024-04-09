@@ -19,7 +19,7 @@ async function CreatorPage({ params }: Props) {
 
   return (
     <div className='relative w-full'>
-      <StreamPlayer user={creator} stream={stream} />
+      <StreamPlayer user={creator} stream={stream} isFollowing />
     </div>
   )
 }

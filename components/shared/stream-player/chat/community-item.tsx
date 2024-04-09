@@ -42,18 +42,18 @@ function CommunityItem({ hostName, participantIdentity, participantName, viewerN
       )}
     >
       <p style={{ color }}> {participantName}</p>
-      {/* {isHost && !isSelf && ( */}
-      <Hint label='Block'>
-        <Button
-          variant='ghost'
-          disabled={pending}
-          onClick={handleBlock}
-          className='size-auto p-1 opacity-0 transition group-hover:opacity-100'
-        >
-          <MinusCircle className='size-4 text-muted-foreground' />
-        </Button>
-      </Hint>
-      {/* )} */}
+      {isHost && !isSelf && (
+        <Hint label='Block'>
+          <Button
+            variant='ghost'
+            disabled={pending}
+            onClick={handleBlock}
+            className='size-auto p-1 opacity-0 transition group-hover:opacity-100'
+          >
+            <MinusCircle className='size-4 text-muted-foreground' />
+          </Button>
+        </Hint>
+      )}
     </div>
   )
 }

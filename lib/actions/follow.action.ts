@@ -22,6 +22,19 @@ export const followUser = async ({ followedUserId }: FollowUserParams) => {
     throw Error('Followed user not found')
   }
 
+  const isBlockByOtherUser = !!(await prisma.block.findUnique({
+    where: {
+      blockedId_blockerId: {
+        blockedId: currentUser.id,
+        blockerId: followedUser.id
+      }
+    }
+  }))
+
+  if (isBlockByOtherUser) {
+    throw Error('User cannot follow a user is blocking them.')
+  }
+
   //* create new if not exist, and not update anything if exist
   const followData = prisma.follow.upsert({
     where: {

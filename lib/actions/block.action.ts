@@ -4,10 +4,15 @@ import prisma from '../prisma'
 import { getUserById, whoAmI } from '../queries/user.query'
 import { BlockUserParams } from '../param'
 import { revalidatePath } from 'next/cache'
+import { RoomServiceClient } from 'livekit-server-sdk'
+
+const roomService = new RoomServiceClient(
+  process.env.LIVEKIT_API_URL!,
+  process.env.LIVEKIT_API_KEY!,
+  process.env.LIVEKIT_SECRET_KEY!
+)
 
 export const blockUser = async ({ blockedUserId }: BlockUserParams) => {
-  // TODO: Disconnecting to stream real time
-  // TODO: allow ability to kick the guest
   const currentUser = await whoAmI()
 
   if (!currentUser) {
@@ -18,10 +23,19 @@ export const blockUser = async ({ blockedUserId }: BlockUserParams) => {
     throw Error('Cannot block your self')
   }
 
-  const blockedUser = await getUserById({ id: blockedUserId })
+  try {
+    await roomService.removeParticipant(currentUser.id, blockedUserId)
+  } catch (error) {
+    // This mean the blocked user is not any in the room now
+  }
 
-  if (!blockedUser) {
-    throw Error('Blocked user not found')
+  let blockedUser
+
+  try {
+    blockedUser = (await getUserById({ id: blockedUserId }))!
+  } catch (error) {
+    // This mean the blocked user is a guest
+    return
   }
 
   //* create new if not exist, and not update anything if exist
@@ -45,8 +59,16 @@ export const blockUser = async ({ blockedUserId }: BlockUserParams) => {
   //* Delete the follow if exist, using deleteMany will not throw error if the follow not exist
   const followData = prisma.follow.deleteMany({
     where: {
-      followedId: blockedUserId,
-      followerId: currentUser.id
+      OR: [
+        {
+          followedId: blockedUserId,
+          followerId: currentUser.id
+        },
+        {
+          followerId: blockedUserId,
+          followedId: currentUser.id
+        }
+      ]
     }
   })
 
@@ -54,6 +76,8 @@ export const blockUser = async ({ blockedUserId }: BlockUserParams) => {
 
   revalidatePath(`/`)
   revalidatePath(`/${blockedUser.username}`)
+  revalidatePath(`/u/${blockedUser.username}`)
+  revalidatePath(`/u/${blockedUser.username}/community`)
 
   return block
 }

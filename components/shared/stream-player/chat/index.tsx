@@ -70,15 +70,27 @@ function Chat({
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>
-          <ChatInfo
-            hostName={hostName}
-            isChatEnabled={isChatEnabled}
-            isOnline={!!isOnline}
-            isDelayed={isChatDelayed}
-            isFollowersOnly={isChatFollowersOnly}
-          />
+          {!isOnline && (
+            <ChatInfo
+              hostName={hostName}
+              isChatEnabled={isChatEnabled}
+              isOnline={!!isOnline}
+              isDelayed={isChatDelayed}
+              isFollowersOnly={isChatFollowersOnly}
+            />
+          )}
 
           <ChatList messages={reversedMessages} isHidden={isHidden} />
+
+          {isOnline && (
+            <ChatInfo
+              hostName={hostName}
+              isChatEnabled={isChatEnabled}
+              isOnline={!!isOnline}
+              isDelayed={isChatDelayed}
+              isFollowersOnly={isChatFollowersOnly}
+            />
+          )}
 
           <ChatForm
             onSubmit={onSubmit}

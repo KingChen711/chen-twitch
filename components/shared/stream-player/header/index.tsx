@@ -30,7 +30,7 @@ function Header({ hostIdentity, hostName, imageUrl, isFollowing, name, viewerIde
   return (
     <div className='flex flex-col items-start justify-between gap-y-4 px-4 lg:flex-row lg:gap-y-0'>
       <div className='flex items-center gap-x-3'>
-        <UserAvatar imageUrl={imageUrl} username={hostName} size='lg' isLive showBadge />
+        <UserAvatar imageUrl={imageUrl} username={hostName} size='lg' isLive={isLive} showBadge={isLive} />
 
         <div className='space-y-1'>
           <div className='flex items-center gap-x-2'>
