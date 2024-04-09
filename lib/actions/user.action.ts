@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma'
 import { CreateUserParams, DeleteUserParams, UpdateUserBio, UpdateUserParams } from '../param'
 import { revalidatePath } from 'next/cache'
 import { whoAmI } from '../queries/user.query'
+import { resetIngress } from './ingress.action'
 
 export const createUser = async (params: CreateUserParams) => {
   return await prisma.user.create({
@@ -12,7 +13,7 @@ export const createUser = async (params: CreateUserParams) => {
       ...params,
       stream: {
         create: {
-          name: params.username
+          name: `${params.username}'s stream`
         }
       }
     }
@@ -31,11 +32,15 @@ export const updateUser = async (params: UpdateUserParams) => {
 }
 
 export const deleteUser = async (params: DeleteUserParams) => {
-  return await prisma.user.delete({
+  const deletedUser = await prisma.user.delete({
     where: {
       clerkId: params.clerkId
     }
   })
+
+  await resetIngress(deletedUser.id)
+
+  return deletedUser
 }
 
 export const updateUserBio = async ({ bio }: UpdateUserBio) => {

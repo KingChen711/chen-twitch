@@ -111,8 +111,25 @@ export const unblockUser = async ({ blockedUserId }: BlockUserParams) => {
     }
   })
 
-  revalidatePath(`/`)
-  revalidatePath(`/${blockedUser.username}`)
+  revalidatePath(`/u/${currentUser.username}/community`)
 
   return block
+}
+
+//* This method get the blocks with the blocked user who blocked by the currentUser
+export const getBlockedUsers = async () => {
+  const currentUser = await whoAmI()
+
+  if (!currentUser) {
+    throw Error('Current user not found')
+  }
+
+  return await prisma.block.findMany({
+    where: {
+      blockerId: currentUser.id
+    },
+    include: {
+      blocked: true
+    }
+  })
 }

@@ -21,7 +21,7 @@ export default function InfoCard({ hostIdentity, name, thumbnailUrl, viewerIdent
     <div className='px-4'>
       <div className='rounded-xl bg-muted'>
         <div className='flex items-center gap-x-2.5 p-4'>
-          <div className='size-auto rounded-md bg-blue-500 p-2'>
+          <div className='size-auto rounded-md bg-primary p-2'>
             <Pencil className='size-5' />
           </div>
           <div>
