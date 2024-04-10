@@ -49,7 +49,7 @@ export default Thumbnail
 export const ThumbnailSkeleton = () => {
   return (
     <div className='group relative aspect-video cursor-pointer rounded-xl'>
-      <Skeleton className='size-full' />
+      <Skeleton className='size-full bg-muted' />
     </div>
   )
 }
